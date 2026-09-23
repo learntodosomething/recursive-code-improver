@@ -1,6 +1,6 @@
 def evaluate_code(code: str, tests: list) -> dict:
     local_vars = {}
-    
+
     try:
         exec(code, {}, local_vars)
     except Exception as e:
@@ -9,7 +9,7 @@ def evaluate_code(code: str, tests: list) -> dict:
             "score": 0,
             "passed": 0,
             "total": len(tests),
-            "error": f"Syntax/Runtime error during definition: {str(e)}"
+            "errors": [f"Szintaktikai/futási hiba a kód definiálásakor: {str(e)}"]
         }
 
     # Megkeressük a függvényt
@@ -25,7 +25,7 @@ def evaluate_code(code: str, tests: list) -> dict:
             "score": 0,
             "passed": 0,
             "total": len(tests),
-            "error": "Nem található függvény a kódban"
+            "errors": ["Nem található függvény a generált kódban"]
         }
 
     passed = 0
